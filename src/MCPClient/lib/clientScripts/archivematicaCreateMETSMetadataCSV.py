@@ -99,6 +99,8 @@ def parseMetadataCSV(job, metadataCSVFilePath):
     metadata = {}
     # use universal newline mode to support unusual newlines, like \r
     with open(metadataCSVFilePath, "rbU") as f:
+        # some CSVs contain bigger fields
+        csv.field_size_limit(10000000)
         reader = csv.reader(f)
         # Parse first row as header
         header = next(reader)
